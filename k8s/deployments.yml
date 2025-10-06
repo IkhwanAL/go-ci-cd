@@ -2,26 +2,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myApp
+  name: myapp
   namespace: default
   labels:
-    app: myApp
+    app: myapp
 spec:
   selector:
     matchLabels:
-      app: myApp
+      app: myapp
   replicas: 2
   template:
     metadata:
       labels:
-        app: myApp
+        app: myapp
     spec:
       containers:
-      - name: myApp
+      - name: myapp
         image: myapp:latest
         ports:
         - containerPort: 8080
-          name: myApp
+          name: myapp
         readinessProbe:
           httpGet:
             path: /healthz
@@ -29,4 +29,3 @@ spec:
           initialDelaySeconds: 2
           periodSeconds: 5
 ---
-
