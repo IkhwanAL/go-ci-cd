@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branch: [ master ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set Up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.24.1'
+      - name: Run tests
+        uses: go test ./...
+      - name: Build and push Docker Image
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: ${{ k-secret.REGISTERY }}/ikhwanal/myapp:${{ github.sha }}

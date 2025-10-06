@@ -1,0 +1,32 @@
+# https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myApp
+  namespace: default
+  labels:
+    app: myApp
+spec:
+  selector:
+    matchLabels:
+      app: myApp
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: myApp
+    spec:
+      containers:
+      - name: myApp
+        image: myapp:latest
+        ports:
+        - containerPort: 8080
+          name: myApp
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 2
+          periodSeconds: 5
+---
+

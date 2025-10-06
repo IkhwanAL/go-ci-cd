@@ -1,0 +1,13 @@
+# https://kubernetes.io/docs/concepts/services-networking/service/
+apiVersion: v1
+kind: Service
+metadata:
+  name: myjob
+spec:
+  selector:
+    app: myjob
+  ports:
+    - port: 8080
+      targetPort: 8080
+---
+
